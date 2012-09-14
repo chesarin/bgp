@@ -1,1 +1,22 @@
-Under the script directory you can find python scripts to parse BGP data.
+Under the scripts directory you can find python scripts to parse BGP data.
+
+The following is the format of each entry in the file:
+
+
+TIME: 12/01/04 00:46:29
+TYPE: TABLE_DUMP/INET
+VIEW: 0
+SEQUENCE: 0
+PREFIX: 0.0.0.0/0
+FROM: 199.74.221.1 AS8121
+ORIGINATED: 11/29/04 03:34:31
+ORIGIN: IGP
+ASPATH: 8121 3491
+NEXT_HOP: 199.74.221.1
+STATUS: 0x1
+
+1) Start by locating the prefix:
+
+   
+
+2) Once you have located the prefix. Keep track of the ASPATH.
