@@ -20,3 +20,5 @@ STATUS: 0x1
    
 
 2) Once you have located the prefix. Keep track of the ASPATH.
+Probably we can even create objects for every single entry in the file.
+This will take a lot of memory but it will give us more flexibility.
