@@ -2,6 +2,7 @@
 from bgp_node import BgpNode
 from itertools import islice
 from collections import defaultdict
+from bz2 import BZ2File
 import re
 import os
 #path = '12242004_txt'
@@ -17,6 +18,22 @@ originpattern = re.compile (r"(ORIGIN:) (\w+)")
 aspathpattern = re.compile (r"ASPATH: ")
 nexthoppattern = re.compile (r"(NEXT_HOP:) (\w+.\w+.\w+.\w+)" )
 statspattern = re.compile (r"(STATUS:) (\w+)")
+def open_bzfile(filename):
+    prefixdb = defaultdict(int)
+    bzfile = BZ2File(filename,'r')
+    for line in bzfile:
+        if line.strip():
+            myfield = line.split(':')
+            prefixdb[myfield[0]] += 1
+#        if prepattern.match(line.strip()):
+#            prep = prepattern.match(line.strip()).group(2)
+#            prefixdb[prep] += 1
+    
+    print "Dictionary has ", len(prefixdb), " entries in it"
+    for key in sorted(prefixdb):
+        print ( key, '=>', prefixdb[key] )
+            
+
 def process_file(filename):
     print "processing filename ", filename
     simplelist = []
@@ -295,8 +312,13 @@ def all_files():
         myfile = path+'/'+infile
         process_file(myfile)
 
+def main():
+    response = raw_input("Enter bz filename to open: ")
+    open_bzfile(response)
 #Start calling functions here
 #lookasn_in_file()
 #lookprefix_in_file()
 #lookasn_in_file()
-lookasn_prefix_in_file()
+#lookasn_prefix_in_file()
+if __name__ == '__main__':
+    main()
